@@ -1,0 +1,16 @@
+#box {
+	font-size: 22px;
+}
+
+.a {
+	color:red;
+}
+.b{
+	background: green;
+}
+.c{
+	text-decoration: underline;
+}
+.d {
+	font-style: italic;
+}
