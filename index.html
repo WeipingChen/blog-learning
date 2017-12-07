@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>预加载</title>
+	<title>ajax</title>
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -10,7 +10,7 @@
 		<div class="nav-bar">
 			<div class="logo"><img src="images/topbar_logo.gif" /></div>
 			<div class="member">个人中心<ul class="member_ul">
-					<li><a href="#">设置</a></li>
+					<li><a href="#">发文</a></li>
 					<li><a href="#">帮助</a></li>
 					<li><a href="#">换肤</a></li>
 					<li><a href="#">退出</a></li>
@@ -18,12 +18,13 @@
 			</div>
 			<div class="reg">注册</div>
 			<div class="login">登录</div>	
+			<div class="info"></div>
 		</div>
 	</div>
 	
 	<div id="reg">
 		<h2>会员注册
-			<img src="" alt="" class="close" />
+			<span src="" alt="" class="close"> </span>
 		</h2>
 		<form name="reg">
 			<dl>
@@ -38,6 +39,7 @@
 					<span class="succ succ_user">	
 						可用！
 					</span>
+					<span class="loading">正在检测用户名...</span>
 				</dd>
 				<dd><label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
 					<input type="password" name="pass" class="text" />
@@ -129,7 +131,7 @@
 					</span>
 				</dd>
 				<dd style="height: 105px;"><label style="vertical-align: top">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
-				 	<textarea name="ps"> </textarea>	
+				 	<textarea name="ps"></textarea>	
 				</dd>
 				<dd style="display: block;" class="ps">还能输入<strong class="num">200</strong>字</dd>
 				<dd style="display: none;" class="ps">已超过<strong  style="color:red;" class="num"></strong>字，<span class="clear">清尾</span></dd>
@@ -141,23 +143,40 @@
 
 	<div id="login">
 		<h2 id="drag">网站登录
-			<img src="" alt="" class="close" />
+			<span src="" alt="" class="close"> </span>
 		</h2>
-<!-- 		<h2 id="drag">网站登录
-			<img src="" alt="" class="close" />
-		</h2> -->
-		<div class="user">
-			账号：<input type="text" name="user" class="text" />			
-		</div>
-		<div class="pass">
-			密码：<input type="password" name="pass" class="text" />			
-		</div>
-		<div class="pass">
-			<input type="button" class="submit" value="登录" />			
-		</div>
-		<div class="other">注册新用户 | 忘记密码？</div>
+		<form action="" name="login">
+			<div class="info"></div>
+			<div class="user">
+				账号：<input type="text" name="user" class="text" />			
+			</div>
+			<div class="pass">
+				密码：<input type="password" name="pass" class="text" />			
+			</div>
+			<div class="submit">
+				<input type="button" name="sub" class="submit" value="登录" />			
+			</div>
+			<div class="other">注册新用户 | 忘记密码？</div>
+		</form>
 	</div>
-
+	<div id="blog">
+		<h2>会员注册
+			<span src="" alt="" class="close"> </span>
+		</h2>
+		<div class="info"></div>
+		<form name="blog">
+			<dl>
+				<dd><label>标&nbsp;&nbsp;题：</label>
+					<input type="text" name="title" class="title" />（*不可为空）
+				</dd>
+				<dd><label style="vertical-align: top">内&nbsp;&nbsp;容：</label>
+				 	<textarea name="content" class="content"></textarea><span style="vertical-align: 45px">（*不可为空）	</span>
+				</dd>
+				<dd style="padding: 10px 0 0 64px;">
+				<input type="button" class="submit" name="sub" value="发表" /></dd>
+			</dl>
+		</form>
+	</div>
 	<div id="nav">
 		<ul class="about">
 			<li></li>
@@ -281,6 +300,14 @@
 	</div>
 
 
+	<div id="loading">
+		<p>加载中...</p>
+	</div>
+
+	<div id="success">
+		<p>成功</p>
+	</div>
+
 	<div id="share">
 		<h2>分享到</h2>
 
@@ -308,7 +335,7 @@
 	</div>
 
 	<div id="photo_big">
-		<h2><img src="images/close.jpg" alt="" class="close" />图片预加载</h2>
+		<h2><span src="" alt="" class="close"> </span>图片预加载</h2>
 		<div class="big">
 			<img src="images/loading.gif" alt="" />
 			<strong class="sl">&lt;</strong>
@@ -347,8 +374,10 @@
 
 
 	<script type="text/javascript" src="tool.js"></script>
+	<script type="text/javascript" src="ajax.js"></script>
 	<script type="text/javascript" src="base.js"></script>
 	<script type="text/javascript" src="base_drag.js"></script>
+	<script type="text/javascript" src="base_form.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

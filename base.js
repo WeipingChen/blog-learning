@@ -393,10 +393,14 @@ Base.prototype.lock = function() {
 		this.elements[i].style.display = "block";	
 		document.documentElement.style.overflow = "hidden";
 
-		 addEvent(this.elements[i], "mousedown", preDef)
+		fixedScroll.top = getScroll().top;
+		fixedScroll.left = getScroll().left;
+		addEvent(this.elements[i], "mousedown", preDef)
+		addEvent(this.elements[i], "mouseup", preDef)
 		// addEvent(document.documentElement, "mouseup", preDef)
 		addEvent(this.elements[i], "selectstart", preDef)
 		// addEvent(window, "scroll", scrollTop);
+		addEvent(window,"scroll", fixedScroll);
 	}
 	return this;
 };
@@ -408,9 +412,10 @@ Base.prototype.unlock = function() {
 		document.body.style.overflow = "auto";
 		document.documentElement.style.overflow = "auto";
 		// removeEvent(window, "scroll", scrollTop);
-		removeEvent(document.documentElement, "mousedown", preDef)
-		removeEvent(document.documentElement, "mouseup", preDef)
-		removeEvent(document.documentElement, "selectstart", preDef)
+		removeEvent(this.elements[i], "mousedown", preDef)
+		removeEvent(this.elements[i], "mouseup", preDef)
+		removeEvent(this.elements[i], "selectstart", preDef)
+		removeEvent(window,"scroll", fixedScroll);
 	}
 	return this;
 };
