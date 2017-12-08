@@ -1007,7 +1007,7 @@ $(function() {
 			screen.lock();
 		}
 	});
-	$("#header .member a").click(function (){
+	$("#header .member a").eq(0).click(function (){
 		$("#blog").center(580,320);		
 		$("#blog").show();	
 		screen.lock().animate({
@@ -1038,7 +1038,7 @@ $(function() {
 		}
 		else {
 			$("#loading").show().center(200,40);
-			$("#loaidng p").html("正在发表博文...");
+			$("#loading p").html("正在发表博文...");
 			var _this = this;
 			this.disabled = true;
 
@@ -1064,6 +1064,34 @@ $(function() {
 								t:30,
 								fn : function () {
 									screen.unlock();	//播完动画再消失
+
+									//获取博文列表
+									$("#index").html("<span class='loading'></span>");
+									$("#index .loading").show();
+
+									ajax({
+										method: "post",
+										url:"get_blog.php",
+										data:{},
+										success: function(text) {
+											var json = JSON.parse(text);
+											var html = "";
+											for(var i = 0; i < json.length; ++i) {
+												html += "<div class='content'><h2>"+ json[i].title + "<em>" + json[i].date+"</em></h2><p>" + json[i].content + "</p></div>";
+											}
+											$("#index").html(html);
+											for(i = 0; i < json.length; ++i){
+												$("#index .content").eq(i).animate({
+													attr:'o',
+													target:100,
+													t: 30,
+													step: 10,
+												});
+											}
+										},
+										async: true,
+									});
+		
 								}
 							});
 						}, 1500);
@@ -1079,8 +1107,119 @@ $(function() {
 	
 
 
+	//获取博文列表
+	$("#index").html("<span class='loading'></span>");
+	$("#index .loading").show();
+
+	ajax({
+		method: "post",
+		url:"get_blog.php",
+		data:{},
+		success: function(text) {
+			var json = JSON.parse(text);
+			var html = "";
+			for(var i = 0; i < json.length; ++i) {
+				html += "<div class='content'><h2>"+ json[i].title + "<em>" + json[i].date+"</em></h2><p>" + json[i].content + "</p></div>";
+			}
+			$("#index").html(html);
+			for(i = 0; i < json.length; ++i){
+				$("#index .content").eq(i).animate({
+					attr:'o',
+					target:100,
+					t: 30,
+					step: 10,
+				});
+			}
+		},
+		async: true,
+	});
 
 	
+
+	$("#skin").center(650, 350).resize(function (){
+		if($("#skin").css("display") != "none"){
+			screen.lock();
+		}
+	});
+	$("#header .member a").eq(1).click(function (){
+		$("#skin").center(650,350);		
+		$("#skin").show();	
+		screen.lock().animate({
+				attr:"o",
+				target:30,
+				t:30,
+			});
+
+		$("#skin .skin_bg").html("<span class='loading'></span>");
+		ajax({
+			method: "post",
+			url:"get_skin.php",
+			data:{"type":"all"},
+			success: function(text) {
+				var json = JSON.parse(text);
+				var html = "";
+				for(var i = 0; i < json.length; ++i) {
+					html += "<dl><dt><img src='images/" + json[i].small_bg + "' big_bg='"
+					+ json[i].big_bg +"' bg_color='" + json[i].bg_color 
+					+ "'alt='' /></dt><dd>" + json[i].bg_text + "</dd></dl>";
+				}
+				$("#skin .skin_bg").html(html).animate({
+					attr:'o',
+					target: 100,
+					t:30,
+					step:10,
+				});
+
+				$("#skin dl dt img").click(function(){
+					$("body").css("background",$(this).attr("bg_color") + " url(images/" + $(this).attr("big_bg") +") repeat-x");
+					ajax({
+						method: "post",
+						url:"get_skin.php",
+						data:{
+							"type":"set",
+							"big_bg":$(this).attr("big_bg"),
+						},
+						success: function(text) {
+							if(text == "1") {
+								$("#success").show().center(200, 40);
+								$("#success p").html("皮肤更换成功...");
+								setTimeout(function(){
+									$("#success").hide();
+								},1500);
+							}
+						},
+						async: true,
+					});
+				});
+			},
+			async: true,
+		});
+
+	});
+	$("#skin .close").click(function (){
+		$("#skin").hide();
+		screen.animate({
+			attr:"o",
+			target:0,
+			t:30,
+			fn : function () {
+				screen.unlock();	//播完动画再消失
+			}
+		});
+	});
+	//可拖拽
+	$("#blog").drag($("#blog h2").last());
+	// 默认显示背景
+	ajax({
+		method: "post",
+		url:"get_skin.php",
+		data:{"type":"main"},
+		success: function(text) {
+			var json = JSON.parse(text);
+			$("body").css("background",json.bg_color + " url(images/" + json.big_bg +") repeat-x");
+		},
+		async: true,
+	});
 });
 
 

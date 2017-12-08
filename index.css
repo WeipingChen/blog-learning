@@ -3,7 +3,10 @@
 body {
 	margin: 0px;
 	padding: 0px;
+	/*background: #e7e9e8 url(images/bg1.jpg) no-repeat ;*/
+	background: none;
 	font-size: 12px;
+	color:#333;
 }
 
 h1, h2, h3, h4, h5 ,p, form{
@@ -24,9 +27,14 @@ li {
 	list-style-type: none;
 }
 
-#header {
-	margin: 0;
+#header_bg {
+	width: 100%;
 	background: url("images/topbar.png") repeat-x;
+}
+
+#header {
+	margin: 0 auto;
+	width: 900px;
 }
 
 #header .nav-bar {
@@ -265,7 +273,69 @@ li {
 	max-height: 100px;
 }
 
+#skin {
+	width: 650px;
+	height: 350px;
+	border: 1px solid #ccc;
+	position: absolute;
+	display: none;
+	z-index: 9999;
+	background: #fff;
+}
 
+#skin h2 {
+	height:25px;
+	text-align: center;
+	font-size: 14px;
+	letter-spacing: 1px;
+	color:#666;
+	background: url("images/layerbg1.png") 0 -46px repeat-x;
+	margin: 0 0 20px 0;
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+	cursor: move;
+}
+
+#skin .close {
+	width: 18px;
+	height: 18px;
+	float: right;
+	position: relative;
+	top:5px;
+	right: 5px;
+	background: url("images/layerbg1.png") 0 -90px repeat-x;
+	cursor: pointer;
+}
+
+#skin dl {
+	float: left;
+	padding: 0 0 0 12px;
+}
+
+#skin dl dt {
+	display: block;
+	cursor: pointer;
+}
+
+#skin dl dd {
+	text-align: center;
+	padding: 5px 0 0 0 ;
+	letter-spacing: 1px;
+}
+
+#skin .skin_bg {
+	position: relative;
+
+}
+
+#skin .skin_bg span.loading {
+	position: absolute;
+	width: 100px;
+	height: 50px;
+	top: 140px;
+	left:290px;
+	background: url("images/loading.gif") no-repeat;
+}
 /*注册*/
 #reg {
 	width: 600px;
@@ -548,7 +618,7 @@ li {
 #nav {
 	width:465px;
 	height:52px;
-	background: #ddd /*url(images/nav_bg.png) no-repeat*/;
+	background: #f2f2f2 /*url(images/nav_bg.png) no-repeat*/;
 	margin: 50px auto;
 	border-radius: 12px;
 	overflow: hidden;
@@ -662,8 +732,52 @@ li {
 #index {
 	width: 630px;
 	height: 570px;
-	background: #eee;
 	float: right;
+	position: relative;
+}
+
+#index div.content h2 {
+	width: 628px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	background: #ccc;
+	text-indent: 10px;
+	border: 1px solid #bbb;
+	border-bottom: none;
+}
+
+#index div.content {
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+#index div.content p {
+	height: 130px;
+	border: 1px solid #bbb;
+	margin: 0 0 10px 0;
+	overflow: hidden;
+	padding: 10px;
+	text-indent: 24px;
+	line-height: 150%;
+	background: #fff;
+}
+
+#index span.loading {
+	position: absolute;
+	top: 260px;
+	left: 260px;
+	width:50px;
+	height: 50px;
+	background: url("images/loading.gif") no-repeat;
+	display: none;
+}
+
+#index div.content h2 em {
+	float: right;
+	font-style: normal;
+	font-weight: normal;
+	padding: 0 10px 0 0;
 }
 
 #banner {
@@ -722,6 +836,8 @@ li {
 #photo {
 	width: 900px;
 	float: left;
+	background: #fff;
+	padding: 10px 0 0 0;
 }
 
 #photo dl {
@@ -1051,4 +1167,12 @@ li {
 	background: url(images/success.ico) no-repeat 20px center;
 	background-size: 18px;
 	text-indent: 50px;
+}
+
+
+#footer {
+	width: 900px;
+	float: left;
+	text-align:center;
+	padding: 20px;
 }
